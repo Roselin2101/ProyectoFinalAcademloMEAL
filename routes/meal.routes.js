@@ -14,7 +14,7 @@ const router = Router();
 router.get('/', getMeals);
 router.get('/:id', validMealById, getMeal);
 
-// router.use(protect);
+router.use(protect);
 
 router.post('/:id', validRestaurantById, createMeal);
 router.patch('/:id', validMealById, updateMeal);

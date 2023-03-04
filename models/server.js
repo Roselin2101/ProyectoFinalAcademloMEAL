@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const { db } = require('../database/db');
 const { userRouter } = require('../routes/user.routes');
-const { restautantRouter } = require('../routes/restaurant.routes');
+const { restaurantRouter } = require('../routes/restaurant.routes');
 const { mealRouter } = require('../routes/meal.routes');
 const { orderRouter } = require('../routes/order.routes');
 const initModel = require('./initModel');
@@ -42,7 +42,7 @@ class Server {
     this.app.use(this.paths.meal, mealRouter);
     this.app.use(this.paths.order, orderRouter);
     this.app.use(this.paths.user, userRouter);
-    this.app.use(this.paths.restaurant, restautantRouter);
+    this.app.use(this.paths.restaurant, restaurantRouter);
 
     this.app.all('*', (req, res, next) => {
       return next(

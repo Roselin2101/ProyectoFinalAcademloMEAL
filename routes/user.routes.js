@@ -33,7 +33,7 @@ router.post(
   login
 );
 
-// router.use(protect);
+router.use(protect);
 
 router.patch('/:id', validUserById, protectAccountOwner, updateUser);
 
