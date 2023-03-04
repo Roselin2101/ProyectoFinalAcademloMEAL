@@ -23,7 +23,7 @@ exports.signupValidations = [
   check('password', 'The password is mandatory').not().isEmpty(),
 ];
 
-exports.loginValidation = [
+exports.loginValidations = [
   check('email', 'The email must be mandatory').not().isEmpty(),
   check('email', 'The email must be a correct format').isEmail(),
   check('password', 'The password must be mandatory').not().isEmpty(),

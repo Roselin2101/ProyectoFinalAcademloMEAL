@@ -3,12 +3,13 @@ const { Router } = require('express');
 const {
   createRestaurant,
   findRestaurants,
-  findRestaurant,
+
   updateRestaurant,
   createReview,
   updateReview,
   deleteReview,
   deleteRestaurant,
+  findRestaurant,
 } = require('../controllers/restaurant.controller');
 const {
   validRestaurantById,
@@ -31,7 +32,7 @@ router.get('/', findRestaurants);
 
 router.get('/:id', validRestaurantById, findRestaurant);
 
-router.use(protect);
+// router.use(protect);
 
 router.post('/', createRestaurantValidation, validateFields, createRestaurant);
 

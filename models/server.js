@@ -1,10 +1,10 @@
 const express = require('express');
 const cors = require('cors');
 const { db } = require('../database/db');
-const { userRouter } = require('../routes/user.router');
-const { restautantRouter } = require('../routes/restaurant.router');
-const { mealRouter } = require('../routes/meal.router');
-const { orderRouter } = require('../routes/order.router');
+const { userRouter } = require('../routes/user.routes');
+const { restautantRouter } = require('../routes/restaurant.routes');
+const { mealRouter } = require('../routes/meal.routes');
+const { orderRouter } = require('../routes/order.routes');
 const initModel = require('./initModel');
 const AppError = require('../utils/appError');
 const globalErrorHandler = require('../controllers/error.controller');
@@ -15,7 +15,7 @@ class Server {
     this.app = express();
     this.port = process.env.PORT || 3000;
 
-    this.patchs = {
+    this.paths = {
       user: '/api/v1/users',
       restaurant: '/api/v1/restaurants',
       meal: 'api/v1/meals',
@@ -39,16 +39,16 @@ class Server {
   }
 
   routes() {
-    this.app.use(this.patchs.meal, mealRouter);
-    this.app.use(this.patchs.order, orderRouter);
-    this.app.use(this.patchs.user, userRouter);
-    this.app.use(this.patchs.restaurant, restautantRouter);
+    this.app.use(this.paths.meal, mealRouter);
+    this.app.use(this.paths.order, orderRouter);
+    this.app.use(this.paths.user, userRouter);
+    this.app.use(this.paths.restaurant, restautantRouter);
 
-    // this.app.call('*', (req, res, next) => {
-    //   return next(
-    //     new AppError(`Can't find ${req.originalUrl} on this server`, 404)
-    //   );
-    // });
+    this.app.all('*', (req, res, next) => {
+      return next(
+        new AppError(`Can't find ${req.originalUrl} on this server`, 404)
+      );
+    });
 
     this.app.use(globalErrorHandler);
   }

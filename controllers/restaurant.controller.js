@@ -31,6 +31,15 @@ exports.findRestaurants = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.findRestaurant = catchAsync(async (req, res, next) => {
+  const { restaurant } = req;
+
+  res.status(200).json({
+    status: 'success',
+    restaurant,
+  });
+});
+
 exports.updateRestaurant = catchAsync(async (req, res, next) => {
   const { restaurant } = req;
   const { name, address } = req.body;

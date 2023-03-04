@@ -11,7 +11,7 @@ const { protect } = require('../middlewares/user.middleware');
 
 const router = Router();
 
-router.use(protect);
+// router.use(protect);
 
 router.post('/', validMealById, createOrder);
 
